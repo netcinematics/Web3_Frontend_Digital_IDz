@@ -31,6 +31,7 @@ code {
     flex-direction: column;
     text-align:left;
     word-break: break-word;
+    margin-top: 10em;
 }
 
 input {
@@ -73,11 +74,13 @@ button {
 }
 
 #logo {
-  float:left;
+  /* float:left;
   display: flex;
   margin-left: -10px;
   margin-top: -16px;
-  width: 210px;
+  width: 210px; */
+  width: 80%;
+  margin: 1em;  
 }
 
 #walletButton {
@@ -97,4 +100,45 @@ h2{
 
 a {
   color:#254cdd
+}
+
+#voteOne {
+  background-color: rgb(153, 70, 180);
+  margin:1em;
+}
+
+#voteTwo {
+  background-color: steelblue;
+  margin:1em;
+}
+
+#publish {
+  background-color: rgb(70, 180, 173);
+  margin:1em;
+}
+
+#walletButton {
+  color: black;
+  background-color: rgb(212, 159, 97);
+  margin:1em; 
+}
+
+h1 {
+  margin:1em;  
+  margin-bottom:-0.222em;
+}
+
+
+.hoverBtn:hover {
+  border: solid 1px yellow;
+}
+
+.hoverBtn:active {
+  border: solid 1px rgb(102, 90, 235);
+  padding: 2px;
+}
+
+.hoverBtn:target {
+  border: solid 1px rgb(235, 90, 225);
+  padding: 1px;
 }

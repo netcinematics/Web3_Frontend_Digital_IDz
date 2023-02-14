@@ -18,17 +18,21 @@ const HelloWorld = () => {
   const [newMessage, setNewMessage] = useState("");
 
   //called only once
-  useEffect(async () => {
-    const message = await loadCurrentMessage();
-    setMessage(message);
+  useEffect(() => {
+    async function fetchMessage() {
+      const message = await loadCurrentMessage();
+      setMessage(message);
+    }
+    fetchMessage();
     addSmartContractListener();
-
-    const { address, status } = await getCurrentWalletConnected();
-
-    setWallet(address);
-    setStatus(status);
-
-    addWalletListener();
+  
+    async function fetchWallet() {
+      const {address, status} = await getCurrentWalletConnected();
+      setWallet(address)
+      setStatus(status); 
+    }
+    fetchWallet();
+    addWalletListener(); 
   }, []);
 
   function addSmartContractListener() {
@@ -59,7 +63,7 @@ const HelloWorld = () => {
         <p>
           {" "}
           🦊{" "}
-          <a target="_blank" href={`https://metamask.io/download.html`}>
+          <a target="_blank" href={`https://metamask.io/download`}>
             You must install Metamask, a virtual Ethereum wallet, in your
             browser.
           </a>
@@ -77,12 +81,35 @@ const HelloWorld = () => {
   const onUpdatePressed = async () => {
     const { status } = await updateMessage(walletAddress, newMessage);
     setStatus(status);
-  };
+};
+
+const onVoteOne = async () => { //TODO: implement
+  console.log('clicked');
+};
+const onVoteTwo = async () => { //TODO: implement
+ console.log('clicked'); 
+};
 
   //the UI of our component
   return (
-    <div id="container">
-      <img id="logo" src={alchemylogo}></img>
+    <div id="container" style={{'display':'flex','alignItems':'center'}}>
+      <h1>~Digital-Identity-Tokenz (DIDz)~</h1>
+      <h1>~PIRATEorNINJA?~</h1>
+      <img id="logo" src="https://nftstorage.link/ipfs/bafybeiabjffxg6grlmirw6mum6utcl4zbrukiytmqrbbt2jy2c2wkfekye/4.jpg"></img>
+      {/* <img id="logo" src={alchemylogo}></img> */}
+    <section>
+      <button className="hoverBtn" id="voteOne" onClick={onVoteOne}>
+          Select Pirate!
+        </button>
+        <button className="hoverBtn" id="voteTwo"  onClick={onVoteTwo}>
+          Select Ninja!
+        </button>      
+        <button className="hoverBtn" id="publish" onClick={onUpdatePressed}>
+          Mint ID!
+        </button>          
+        </section>
+
+
       <button id="walletButton" onClick={connectWalletPressed}>
         {walletAddress.length > 0 ? (
           "Connected: " +
@@ -93,13 +120,12 @@ const HelloWorld = () => {
           <span>Connect Wallet</span>
         )}
       </button>
-
-      <h2 style={{ paddingTop: "50px" }}>Current Message:</h2>
+<section>
+      <h2 style={{ paddingTop: "50px" }}>Last ID:</h2>
       <p>{message}</p>
-
-      <h2 style={{ paddingTop: "18px" }}>New Message:</h2>
-
+</section>
       <div>
+      <h2 style={{ paddingTop: "18px" }}>New ID:</h2>
         <input
           type="text"
           placeholder="Update the message in your smart contract."
@@ -108,9 +134,9 @@ const HelloWorld = () => {
         />
         <p id="status">{status}</p>
 
-        <button id="publish" onClick={onUpdatePressed}>
+        {/* <button id="publish" onClick={onUpdatePressed}>
           Update
-        </button>
+        </button> */}
       </div>
     </div>
   );
