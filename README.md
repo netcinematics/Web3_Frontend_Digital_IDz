@@ -144,3 +144,6 @@ X - DEMO DETAILS - text/script - in README.
    See you at AlchemyU/Discord.
 
    Let's BUIDL ... @spazefalcon
+
+
+> npm start
